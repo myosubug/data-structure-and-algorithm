@@ -1,0 +1,18 @@
+class Solution:
+    def characterReplacement(self, s: str, k: int) -> int:
+        left, maxc = 0, 0
+        counter = {}
+        longest = 0
+
+        for right, c in enumerate(s):
+            counter[c] = 1 + counter.get(c, 0)
+            maxc = max(maxc, counter[c])
+
+            while (right-left+1) - maxc > k:
+                counter[s[left]] -= 1
+                left += 1
+            
+            longest= max(longest, right-left+1)
+
+        
+        return longest
